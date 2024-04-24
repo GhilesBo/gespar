@@ -1,0 +1,85 @@
+from django.db import models
+
+class Commande(models.Model):
+    pk_NumeroCommande = models.CharField(max_length=25, primary_key=True)
+    Annee = models.IntegerField()
+    Budget = models.CharField(max_length=7)
+    Financement = models.CharField(max_length=50, choices=[('Ville', 'Ville'), ('Etat', 'Etat')])
+    TypeVehicule = models.CharField(max_length=50, choices=[('VL', 'VL'), ('PL', 'PL'), ('VU', 'VU'), ('2R', '2R'), ('Bateau', 'Bateau')])
+    Categorie = models.CharField(max_length=50)
+    Designation = models.CharField(max_length=100)
+    EtatSignatureCommandeAchat = models.CharField(max_length=50)
+    DateCommandeVenteDILT = models.DateField()
+    EngagementJuridique = models.CharField(max_length=50)
+    NumeroARC = models.CharField(max_length=50)
+    DateCommandeVente = models.DateField()
+    Direction = models.CharField(max_length=100)
+    SousDirection = models.CharField(max_length=100)
+    ServiceAffectation = models.CharField(max_length=100)
+    EspacePieceJointe = models.BinaryField()  # Change to appropriate field type
+    Commentaire = models.TextField()
+
+class RenseignementVhPere(models.Model):
+    pk_NumeroSerie = models.CharField(max_length=17, primary_key=True)
+    Immatriculation = models.CharField(max_length=10)
+    Aspect = models.CharField(max_length=50, choices=[('Origine', 'Origine'), ('Banalisé léger', 'Banalisé léger'), ('Banalisé complet', 'Banalisé complet'), ('Sérigraphié', 'Sérigraphié')])
+    DroitOuvertRenouvellement = models.CharField(max_length=3, choices=[('oui', 'oui'), ('non', 'non')])
+    EspacePieceJointe = models.BinaryField()  # Change to appropriate field type
+    Commentaire = models.TextField()
+    fk_NumeroSerieFils = models.ForeignKey('RenseignementVhFils', on_delete=models.CASCADE)
+
+class RenseignementVhFils(models.Model):
+    NumeroSerie = models.CharField(max_length=17, primary_key=True)
+    CodeArticle = models.CharField(max_length=100)
+    NumeroImmatriculation = models.CharField(max_length=100)
+    TypeVehicule = models.CharField(max_length=50, choices=[('VL', 'VL'), ('PL', 'PL'), ('VU', 'VU'), ('2R', '2R'), ('Bateau', 'Bateau'), ('Remorque', 'Remorque')])
+    Aspect = models.CharField(max_length=50, choices=[('Origine', 'Origine'), ('Banalisé léger', 'Banalisé léger'), ('Banalisé complet', 'Banalisé complet'), ('Banalisé amovible', 'Banalisé amovible'), ('Sérigraphié', 'Sérigraphié')])
+    Energie = models.CharField(max_length=50, choices=[('Essence', 'Essence'), ('Gazole', 'Gazole'), ('Electrique', 'Electrique'), ('Hybride', 'Hybride'), ('Hybride rechargeable', 'Hybride rechargeable')])
+    Constructeur = models.CharField(max_length=100)
+    DesignationArticle = models.CharField(max_length=100)
+    PrixNetTTC = models.DecimalField(max_digits=10, decimal_places=2)
+    PrevisionnelleLivraison = models.DateField()
+    EspacePieceJointe = models.BinaryField()  # Change to appropriate field type
+    Commentaire = models.TextField()
+    fk_NumeroSeriePere = models.ForeignKey('RenseignementVhPere', on_delete=models.CASCADE)
+    fk_NumeroCommande = models.ForeignKey('Commande', on_delete=models.CASCADE)
+
+class EtudeTechnique(models.Model):
+    NumeroChassis = models.CharField(max_length=17, primary_key=True)
+    NumeroImmatriculation = models.CharField(max_length=100)
+    Constructeur = models.CharField(max_length=100)
+    DesignationArticle = models.CharField(max_length=100)
+    DateEmissionCahierCharges = models.DateField()
+    Prestataire = models.CharField(max_length=50, choices=[('ACA', 'ACA'), ('UGAP', 'UGAP'), ('CET', 'CET'), ('atelier nord', 'atelier nord'), ('atelier sud', 'atelier sud'), ('atelier central', 'atelier central'), ('marché public', 'marché public'), ('hors marché', 'hors marché'), ('SAILMI', 'SAILMI')])
+    StatutDossier = models.CharField(max_length=50, choices=[('en attente de validation', 'en attente de validation'), ('en attente de devis', 'en attente de devis'), ('en attente de livraison', 'en attente de livraison'), ('mise à disposition', 'mise à disposition'), ('annulé', 'annulé'), ('terminé', 'terminé')])
+    DateTransmissionDevis = models.DateField()
+    DateEnvoiDevisSigneBureauFinances = models.DateField()
+    DateReceptionBonCommande = models.DateField()
+    DateEnvoiServiceFaitSigneBureauFinances = models.DateField()
+    DateDebutTravauxCarossier = models.DateField()
+    DateRecuperationVHChezCarossier = models.DateField()
+    CoutAmenagement = models.DecimalField(max_digits=10, decimal_places=2)
+    NumeroEJAménagement = models.CharField(max_length=100)
+    DateReceptionChezCarossier = models.DateField()
+    DateDebutTravauxCarossier = models.DateField()
+    DateRecuperationVehiculeChezCarossier = models.DateField()
+    EspacePieceJointe = models.BinaryField()  # Change to appropriate field type
+    Commentaire = models.TextField()
+    NumeroCommande = models.ForeignKey('Commande', on_delete=models.CASCADE)
+    fk_NumeroSerie = models.ForeignKey('RenseignementVhFils', on_delete=models.CASCADE)
+
+class Livraison(models.Model):
+    pk_NumeroCommande = models.CharField(max_length=25, primary_key=True) # meme clé que la table commande (à voir si ça marche)
+    DateReception = models.DateField()
+    CarteGrise = models.CharField(max_length=50, choices=[('en cours', 'en cours'), ('envoyé', 'envoyé'), ('réceptionné', 'réceptionné')])
+    CarnetBord = models.CharField(max_length=50, choices=[('en cours', 'en cours'), ('envoyé', 'envoyé'), ('réceptionné', 'réceptionné')])
+    CarteCarburant = models.CharField(max_length=50, choices=[('en cours', 'en cours'), ('envoyé', 'envoyé'), ('réceptionné', 'réceptionné')])
+    Statut = models.CharField(max_length=100, choices=[('Attente SAV équipementier', 'Attente SAV équipementier'), ('Livré au service', 'Livré au service'), ('En cours d\'équipement', 'En cours d\'équipement'), ('Attente transfert vers SVN', 'Attente transfert vers SVN'), ('Attente transfert vers Le Chesnay', 'Attente transfert vers Le Chesnay'), ('Prêt à livrer', 'Prêt à livrer'), ('Attente affectation', 'Attente affectation'), ('Attente documentation SGF', 'Attente documentation SGF'), ('Attente autre', 'Attente autre'), ('Attente de jugement', 'Attente de jugement'), ('En cours de réparation', 'En cours de réparation'), ('Erreur de livraison', 'Erreur de livraison'), ('Refusé non conforme', 'Refusé non conforme'), ('Attente immatriculation', 'Attente immatriculation')])
+    StatutLivraison = models.CharField(max_length=50, choices=[('En contrôle', 'En contrôle'), ('En parc', 'En parc'), ('Non concerné', 'Non concerné'), ('Perçu', 'Perçu'), ('Incomplet', 'Incomplet'), ('En commande', 'En commande'), ('Inconnu', 'Inconnu')])
+    DateMiseDisposition = models.DateField()
+    DateRdvRemiseCles = models.DateField()
+    DateRecuperationService = models.DateField()
+    DossierCloture = models.CharField(max_length=3, choices=[('oui', 'oui'), ('non', 'non')])
+    EspacePieceJointe = models.BinaryField()  # Change to appropriate field type
+    Commentaire = models.TextField()
+    NumeroSerieVehiculeFils = models.ForeignKey('RenseignementVhFils', on_delete=models.CASCADE)

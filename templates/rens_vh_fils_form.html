@@ -1,0 +1,88 @@
+<form method="post" class="needs-validation" novalidate>
+    {% csrf_token %}
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            {{ form.NumeroSerie.label_tag }}
+            {{ form.NumeroSerie }}
+            <div class="invalid-feedback">{{ form.NumeroSerie.errors }}</div>
+        </div>
+        <div class="form-group col-md-6">
+            {{ form.CodeArticle.label_tag }}
+            {{ form.CodeArticle }}
+            <div class="invalid-feedback">{{ form.CodeArticle.errors }}</div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            {{ form.NumeroImmatriculation.label_tag }}
+            {{ form.NumeroImmatriculation }}
+            <div class="invalid-feedback">{{ form.NumeroImmatriculation.errors }}</div>
+        </div>
+        <div class="form-group col-md-6">
+            {{ form.TypeVehicule.label_tag }}
+            {{ form.TypeVehicule }}
+            <div class="invalid-feedback">{{ form.TypeVehicule.errors }}</div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            {{ form.Aspect.label_tag }}
+            {{ form.Aspect }}
+            <div class="invalid-feedback">{{ form.Aspect.errors }}</div>
+        </div>
+        <div class="form-group col-md-6">
+            {{ form.Energie.label_tag }}
+            {{ form.Energie }}
+            <div class="invalid-feedback">{{ form.Energie.errors }}</div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            {{ form.Constructeur.label_tag }}
+            {{ form.Constructeur }}
+            <div class="invalid-feedback">{{ form.Constructeur.errors }}</div>
+        </div>
+        <div class="form-group col-md-6">
+            {{ form.DesignationArticle.label_tag }}
+            {{ form.DesignationArticle }}
+            <div class="invalid-feedback">{{ form.DesignationArticle.errors }}</div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            {{ form.PrixNetTTC.label_tag }}
+            {{ form.PrixNetTTC }}
+            <div class="invalid-feedback">{{ form.PrixNetTTC.errors }}</div>
+        </div>
+        <div class="form-group col-md-6">
+            {{ form.PrevisionnelleLivraison.label_tag }}
+            {{ form.PrevisionnelleLivraison }}
+            <div class="invalid-feedback">{{ form.PrevisionnelleLivraison.errors }}</div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            {{ form.EspacePieceJointe.label_tag }}
+            {{ form.EspacePieceJointe }}
+            <div class="invalid-feedback">{{ form.EspacePieceJointe.errors }}</div>
+        </div>
+        <div class="form-group col-md-6">
+            {{ form.Commentaire.label_tag }}
+            {{ form.Commentaire }}
+            <div class="invalid-feedback">{{ form.Commentaire.errors }}</div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            {{ form.fk_NumeroSeriePere.label_tag }}
+            {{ form.fk_NumeroSeriePere }}
+            <div class="invalid-feedback">{{ form.fk_NumeroSeriePere.errors }}</div>
+        </div>
+        <div class="form-group col-md-6">
+            {{ form.fk_NumeroCommande.label_tag }}
+            {{ form.fk_NumeroCommande }}
+            <div class="invalid-feedback">{{ form.fk_NumeroCommande.errors }}</div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Enregistrer</button>
+</form>

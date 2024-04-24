@@ -1,0 +1,109 @@
+
+<form method="post" class="needs-validation" novalidate>
+    <h3 class="text-center text-primary">Informations sur la commande</h3>
+    {% csrf_token %}
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label class="font-weight-bold">{{ form.pk_NumeroCommande.label }}</label>
+            {{ form.pk_NumeroCommande|add_class:"form-control" }}
+            <div class="invalid-feedback">{{ form.pk_NumeroCommande.errors }}</div>
+        </div>
+        <div class="form-group col-md-6">
+            <label class="font-weight-bold">{{ form.Annee.label }}</label>
+            {{ form.Annee|add_class:"form-control" }}
+            <div class="invalid-feedback">{{ form.Annee.errors }}</div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label class="font-weight-bold">{{ form.Budget.label }}</label>
+            {{ form.Budget|add_class:"form-control" }}
+            <div class="invalid-feedback">{{ form.Budget.errors }}</div>
+        </div>
+        <div class="form-group col-md-6">
+            <label class="font-weight-bold">{{ form.Financement.label }}</label>
+            {{ form.Financement|add_class:"form-control" }}
+            <div class="invalid-feedback">{{ form.Financement.errors }}</div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label class="font-weight-bold">{{ form.TypeVehicule.label }}</label>
+            {{ form.TypeVehicule|add_class:"form-control" }}
+            <div class="invalid-feedback">{{ form.TypeVehicule.errors }}</div>
+        </div>
+        <div class="form-group col-md-6">
+            <label class="font-weight-bold">{{ form.Categorie.label }}</label>
+            {{ form.Categorie|add_class:"form-control" }}
+            <div class="invalid-feedback">{{ form.Categorie.errors }}</div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label class="font-weight-bold">{{ form.Designation.label }}</label>
+            {{ form.Designation|add_class:"form-control" }}
+            <div class="invalid-feedback">{{ form.Designation.errors }}</div>
+        </div>
+        <div class="form-group col-md-6">
+            <label class="font-weight-bold">{{ form.EtatSignatureCommandeAchat.label }}</label>
+            {{ form.EtatSignatureCommandeAchat|add_class:"form-control" }}
+            <div class="invalid-feedback">{{ form.EtatSignatureCommandeAchat.errors }}</div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label class="font-weight-bold">{{ form.DateCommandeVenteDILT.label }}</label>
+            {{ form.DateCommandeVenteDILT|add_class:"form-control" }}
+            <div class="invalid-feedback">{{ form.DateCommandeVenteDILT.errors }}</div>
+        </div>
+        <div class="form-group col-md-6">
+            <label class="font-weight-bold">{{ form.EngagementJuridique.label }}</label>
+            {{ form.EngagementJuridique|add_class:"form-control" }}
+            <div class="invalid-feedback">{{ form.EngagementJuridique.errors }}</div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label class="font-weight-bold">{{ form.NumeroARC.label }}</label>
+            {{ form.NumeroARC|add_class:"form-control" }}
+            <div class="invalid-feedback">{{ form.NumeroARC.errors }}</div>
+        </div>
+        <div class="form-group col-md-6">
+            <label class="font-weight-bold">{{ form.DateCommandeVente.label }}</label>
+            {{ form.DateCommandeVente|add_class:"form-control" }}
+            <div class="invalid-feedback">{{ form.DateCommandeVente.errors }}</div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label class="font-weight-bold">{{ form.Direction.label }}</label>
+            {{ form.Direction|add_class:"form-control" }}
+            <div class="invalid-feedback">{{ form.Direction.errors }}</div>
+        </div>
+        <div class="form-group col-md-6">
+            <label class="font-weight-bold">{{ form.SousDirection.label }}</label>
+            {{ form.SousDirection|add_class:"form-control" }}
+            <div class="invalid-feedback">{{ form.SousDirection.errors }}</div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label class="font-weight-bold">{{ form.ServiceAffectation.label }}</label>
+            {{ form.ServiceAffectation|add_class:"form-control" }}
+            <div class="invalid-feedback">{{ form.ServiceAffectation.errors }}</div>
+        </div>
+        <div class="form-group col-md-6">
+            <label class="font-weight-bold">{{ form.EspacePieceJointe.label }}</label>
+            {{ form.EspacePieceJointe|add_class:"form-control" }}
+            <div class="invalid-feedback">{{ form.EspacePieceJointe.errors }}</div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <label class="font-weight-bold">{{ form.Commentaire.label }}</label>
+            {{ form.Commentaire|add_class:"form-control" }}
+            <div class="invalid-feedback">{{ form.Commentaire.errors }}</div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Enregistrer</button>
+</form>
